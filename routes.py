@@ -24,6 +24,7 @@ def get_user(username, password):
     else:
         return None
 
+
 @app.route('/')
 @app.route('/index')
 def index():
@@ -62,7 +63,7 @@ def login():
         password = request.form["password"]
         user = get_user(username, password)
         if user is not None:
-            session["user"] = user
+            session["user_id"] = user.id
             session["is_logged"] = True
         else:
             flash("Incorrect username or password.")
