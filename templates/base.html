@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <header>
+        {% for site in ['index', 'profile', 'login', 'register']%}
+            <a href="{{ url_for(site) }}">{{site}}</a>
+        {% endfor %}
+    </header>
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+</body>
+</html>
