@@ -6,11 +6,27 @@
 </head>
 <body>
     <header>
-        {% for site in ['index', 'profile', 'login', 'register']%}
+        {% for site in ['index', 'profile'] %}
             <a href="{{ url_for(site) }}">{{site}}</a>
         {% endfor %}
+        {% if not "is_logged" in session or not session["is_logged"] %}
+            {% for site in ['login', 'register']%}
+                <a href="{{ url_for(site) }}">{{site}}</a>
+            {% endfor %}
+        {% else %}
+            <a href="{{ url_for('logout') }}">logout</a>
+        {% endif %}
     </header>
     <main>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                        <li> {{message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
         {% block content %}
         {% endblock %}
     </main>
